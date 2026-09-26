@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 // Basic metadata for page title and description
@@ -16,9 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-slate-900 text-slate-100 min-h-screen antialiased">
+      <body className="min-h-screen bg-slate-900 text-slate-100 antialiased flex flex-col">
         {/* Toast notification component ready for future alerts */}
         <Toaster position="top-right" />
+
+        {/* Global Navigation Bar */}
+        <Navbar />
+
+        {/* Page Content */}
         {children}
       </body>
     </html>

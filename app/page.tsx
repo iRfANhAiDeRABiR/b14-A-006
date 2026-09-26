@@ -3,7 +3,7 @@ import { Dumbbell, CheckCircle2, Flame } from "lucide-react";
 // Simple FitLog starter homepage to confirm the setup works
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 text-center">
+    <main className="flex flex-1 flex-col items-center justify-center p-6 text-center">
       {/* Welcome Card */}
       <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-800/60 p-8 shadow-2xl backdrop-blur">
         {/* Brand Icon */}
