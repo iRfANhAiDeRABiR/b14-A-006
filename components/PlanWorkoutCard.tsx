@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Flame, Star, Check, X } from "lucide-react";
+import { useWorkout } from "@/context/WorkoutContext";
 import type { Workout } from "@/types/workout";
 
 type PlanWorkoutCardProps = {
@@ -9,6 +12,8 @@ type PlanWorkoutCardProps = {
 };
 
 export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProps) {
+  const { markAsDone, removeFromPlan, removeFromSaved } = useWorkout();
+
   return (
     <article className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-[#232732] bg-[#14171e] p-3 sm:px-4 sm:py-3.5 transition-colors hover:border-[#323846]">
       <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
@@ -58,6 +63,7 @@ export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProp
         {isPlan && (
           <button
             type="button"
+            onClick={() => markAsDone(workout.id)}
             className="flex items-center gap-1.5 rounded-full bg-[#ccff00] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-950 transition-colors hover:bg-[#b8e600]"
           >
             <Check className="h-3.5 w-3.5 stroke-[2.5]" />
@@ -68,6 +74,7 @@ export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProp
         <button
           type="button"
           aria-label="Remove exercise"
+          onClick={() => (isPlan ? removeFromPlan(workout.id) : removeFromSaved(workout.id))}
           className="flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
         >
           <X className="h-4 w-4" />

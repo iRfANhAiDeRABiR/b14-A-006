@@ -9,6 +9,9 @@ type WorkoutContextType = {
   saved: Workout[];
   addToPlan: (workout: Workout) => void;
   addToSaved: (workout: Workout) => void;
+  markAsDone: (id: number) => void;
+  removeFromPlan: (id: number) => void;
+  removeFromSaved: (id: number) => void;
 };
 
 const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
@@ -37,8 +40,33 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
     toast.success("Saved for later");
   };
 
+  const markAsDone = (id: number) => {
+    setPlan((current) => current.filter((workout) => workout.id !== id));
+    toast.success("Workout completed!");
+  };
+
+  const removeFromPlan = (id: number) => {
+    setPlan((current) => current.filter((workout) => workout.id !== id));
+    toast.success("Removed from today's plan");
+  };
+
+  const removeFromSaved = (id: number) => {
+    setSaved((current) => current.filter((workout) => workout.id !== id));
+    toast.success("Removed from saved");
+  };
+
   return (
-    <WorkoutContext.Provider value={{ plan, saved, addToPlan, addToSaved }}>
+    <WorkoutContext.Provider
+      value={{
+        plan,
+        saved,
+        addToPlan,
+        addToSaved,
+        markAsDone,
+        removeFromPlan,
+        removeFromSaved,
+      }}
+    >
       <Toaster
         position="top-right"
         toastOptions={{
@@ -61,3 +89,4 @@ export function useWorkout() {
   }
   return context;
 }
+
