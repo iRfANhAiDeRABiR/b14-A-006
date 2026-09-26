@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import WorkoutCard from "@/components/WorkoutCard";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import type { Workout } from "@/types/workout";
 
 export default function HomePage() {
@@ -16,26 +17,29 @@ export default function HomePage() {
         if (res.ok) {
           const data = await res.json();
           setWorkouts(data);
-          setLoading(false);
           return;
         }
-      } catch {}
+      } catch (error) {
+        console.error(error);
+      }
 
       try {
         const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
         if (res.ok) {
           const data = await res.json();
           setWorkouts(data);
-          setLoading(false);
           return;
         }
-      } catch {}
+      } catch (error) {
+        console.error(error);
+      }
 
       setWorkouts([]);
-      setLoading(false);
     }
 
-    loadWorkouts();
+    loadWorkouts().finally(() => {
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -53,9 +57,7 @@ export default function HomePage() {
         </div>
 
         {loading ? (
-          <div className="py-20 text-center text-sm font-medium text-slate-400">
-            Loading workouts...
-          </div>
+          <LoadingSpinner />
         ) : (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {workouts.map((workout) => (

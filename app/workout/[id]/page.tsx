@@ -10,7 +10,10 @@ async function getWorkout(id: string): Promise<Workout | null> {
       { cache: "no-store" }
     );
     if (res.ok) {
-      return await res.json();
+      const data = await res.json();
+      if (data && data.id && data.name) {
+        return data;
+      }
     }
   } catch {}
 
@@ -19,7 +22,10 @@ async function getWorkout(id: string): Promise<Workout | null> {
       cache: "no-store",
     });
     if (res.ok) {
-      return await res.json();
+      const data = await res.json();
+      if (data && data.id && data.name) {
+        return data;
+      }
     }
   } catch {}
 
