@@ -3,9 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useWorkout } from "@/context/WorkoutContext";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { plan, saved } = useWorkout();
 
   const isActive = (path: string) => {
     if (path === "/") {
@@ -66,7 +68,7 @@ export default function Navbar() {
               Plan
             </span>
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#ccff00] text-[11px] font-bold text-slate-950">
-              0
+              {plan.length}
             </span>
           </Link>
 
@@ -78,7 +80,7 @@ export default function Navbar() {
               Saved
             </span>
             <span className="flex h-5 w-5 items-center justify-center rounded-full border border-slate-700 text-[11px] font-medium text-slate-300">
-              0
+              {saved.length}
             </span>
           </Link>
         </div>

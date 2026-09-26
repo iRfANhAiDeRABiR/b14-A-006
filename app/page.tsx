@@ -11,18 +11,28 @@ export default function HomePage() {
 
   useEffect(() => {
     async function loadWorkouts() {
-      try {
-        let res = await fetch("https://api.abcz.workers.dev/api/fitlog");
-        if (!res.ok) {
-          res = await fetch("https://api.api-store.workers.dev/api/fitlog");
+      const fetchPrimary = fetch("https://api.abcz.workers.dev/api/fitlog").then(
+        (res) => {
+          if (!res.ok) throw new Error();
+          return res.json();
         }
-        const data = await res.json();
+      );
+
+      const fetchFallback = fetch(
+        "https://api.api-store.workers.dev/api/fitlog"
+      ).then((res) => {
+        if (!res.ok) throw new Error();
+        return res.json();
+      });
+
+      try {
+        const data = await Promise.any([fetchPrimary, fetchFallback]);
         setWorkouts(data);
       } catch {
         try {
-          const fallbackRes = await fetch("https://api.api-store.workers.dev/api/fitlog");
-          const fallbackData = await fallbackRes.json();
-          setWorkouts(fallbackData);
+          const res = await fetch("https://api.api-store.workers.dev/api/fitlog");
+          const data = await res.json();
+          setWorkouts(data);
         } catch {
           setWorkouts([]);
         }

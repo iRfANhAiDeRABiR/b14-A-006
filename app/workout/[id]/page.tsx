@@ -1,30 +1,30 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Plus, Bookmark } from "lucide-react";
+import WorkoutActions from "@/components/WorkoutActions";
 import type { Workout } from "@/types/workout";
 
 async function getWorkout(id: string): Promise<Workout | null> {
-  try {
-    let res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, {
+  const fetchPrimary = fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, {
+    cache: "no-store",
+  }).then((res) => {
+    if (!res.ok) throw new Error();
+    return res.json();
+  });
+
+  const fetchFallback = fetch(
+    `https://api.api-store.workers.dev/api/fitlog/${id}`,
+    {
       cache: "no-store",
-    });
-    if (!res.ok) {
-      res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`, {
-        cache: "no-store",
-      });
     }
-    if (!res.ok) return null;
-    return await res.json();
+  ).then((res) => {
+    if (!res.ok) throw new Error();
+    return res.json();
+  });
+
+  try {
+    return await Promise.any([fetchPrimary, fetchFallback]);
   } catch {
-    try {
-      const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`, {
-        cache: "no-store",
-      });
-      if (!res.ok) return null;
-      return await res.json();
-    } catch {
-      return null;
-    }
+    return null;
   }
 }
 
@@ -59,6 +59,7 @@ export default async function WorkoutDetailPage({
             alt={workout.name}
             fill
             priority
+            unoptimized
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
           />
@@ -123,23 +124,7 @@ export default async function WorkoutDetailPage({
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
-            <button
-              type="button"
-              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#ccff00] px-6 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-black transition-colors hover:bg-[#b8e600] active:scale-95"
-            >
-              <Plus className="h-4 w-4" />
-              <span>ADD TO TODAY&apos;S PLAN</span>
-            </button>
-
-            <button
-              type="button"
-              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-gray-700 bg-transparent px-6 py-3.5 text-xs sm:text-sm font-medium uppercase tracking-wider text-white transition-colors hover:bg-slate-800 active:scale-95"
-            >
-              <Bookmark className="h-4 w-4" />
-              <span>SAVE FOR LATER</span>
-            </button>
-          </div>
+          <WorkoutActions workout={workout} />
         </div>
       </div>
     </main>
