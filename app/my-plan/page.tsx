@@ -6,9 +6,12 @@ import { ChevronDown } from "lucide-react";
 import { useWorkout } from "@/context/WorkoutContext";
 import PlanWorkoutCard from "@/components/PlanWorkoutCard";
 
+type SortOption = "duration" | "calories" | "rating";
+
 export default function MyPlanPage() {
   const { plan, saved } = useWorkout();
   const [activeTab, setActiveTab] = useState<"plan" | "saved">("plan");
+  const [sortBy, setSortBy] = useState<SortOption>("duration");
 
   const targetList = activeTab === "plan" ? plan : saved;
   const exercises = targetList.length;
@@ -21,7 +24,18 @@ export default function MyPlanPage() {
     0
   );
 
-  const displayedWorkouts = targetList;
+  const displayedWorkouts = [...targetList].sort((a, b) => {
+    if (sortBy === "duration") {
+      return Number(a.duration) - Number(b.duration);
+    }
+    if (sortBy === "calories") {
+      return Number(a.caloriesBurned) - Number(b.caloriesBurned);
+    }
+    if (sortBy === "rating") {
+      return Number(b.rating) - Number(a.rating);
+    }
+    return 0;
+  });
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
@@ -93,10 +107,27 @@ export default function MyPlanPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-slate-400">Sort By</span>
-          <div className="flex items-center gap-2 rounded-lg border border-[#232732] bg-[#13161d] px-3 py-1.5 text-xs font-medium text-white shadow-sm">
-            <span>Duration</span>
-            <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
+          <label htmlFor="sort-by" className="text-xs font-medium text-slate-400">
+            Sort By
+          </label>
+          <div className="relative inline-flex items-center">
+            <select
+              id="sort-by"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as SortOption)}
+              className="appearance-none rounded-lg border border-[#232732] bg-[#13161d] py-1.5 pl-3 pr-8 text-xs font-medium text-white shadow-sm focus:border-slate-500 focus:outline-none cursor-pointer"
+            >
+              <option value="duration" className="bg-[#13161d] text-white">
+                Duration
+              </option>
+              <option value="calories" className="bg-[#13161d] text-white">
+                Calories
+              </option>
+              <option value="rating" className="bg-[#13161d] text-white">
+                Rating
+              </option>
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-2.5 h-3.5 w-3.5 text-slate-400" />
           </div>
         </div>
       </div>
