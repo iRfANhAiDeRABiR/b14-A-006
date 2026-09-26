@@ -10,36 +10,36 @@ type PlanWorkoutCardProps = {
 
 export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProps) {
   return (
-    <article className="flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-2xl border border-[#232732] bg-[#14171e] p-4 sm:p-5 transition-colors hover:border-[#323846]">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
-        <div className="relative h-28 w-full sm:h-20 sm:w-36 overflow-hidden rounded-xl bg-slate-900 shrink-0">
+    <article className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-[#232732] bg-[#14171e] p-3 sm:px-4 sm:py-3.5 transition-colors hover:border-[#323846]">
+      <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+        <div className="relative h-16 w-28 sm:h-[72px] sm:w-36 overflow-hidden rounded-xl bg-slate-900 shrink-0">
           <Image
             src={workout.image}
             alt={workout.name}
             fill
             unoptimized
-            sizes="(max-width: 640px) 100vw, 144px"
+            sizes="(max-width: 640px) 112px, 144px"
             className="object-cover"
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <h3 className="text-base sm:text-lg font-bold uppercase tracking-tight text-white">
+        <div className="flex flex-col min-w-0">
+          <h3 className="text-sm sm:text-base font-bold uppercase tracking-tight text-white truncate">
             {workout.name}
           </h3>
-          <p className="text-xs sm:text-sm text-slate-400 font-medium">
+          <p className="text-xs text-slate-400 font-medium truncate">
             {workout.equipment}
           </p>
-          <div className="mt-1 flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-slate-400">
-            <span className="flex items-center gap-1.5">
+          <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-slate-400">
+            <span className="flex items-center gap-1">
               <Clock className="h-3.5 w-3.5 text-[#ccff00]" />
               {workout.duration} min
             </span>
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-1">
               <Flame className="h-3.5 w-3.5 text-[#ccff00]" />
               {workout.caloriesBurned} kcal
             </span>
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-1">
               <Star className="h-3.5 w-3.5 text-[#ccff00]" />
               {workout.rating}
             </span>
@@ -47,10 +47,10 @@ export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProp
         </div>
       </div>
 
-      <div className="flex items-center gap-3 shrink-0 flex-wrap sm:flex-nowrap mt-2 md:mt-0">
+      <div className="flex items-center gap-2 sm:gap-3 shrink-0 self-end sm:self-center">
         <Link
           href={`/workout/${workout.id}`}
-          className="rounded-full border border-slate-700 px-4 py-2 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:border-slate-500 hover:text-white"
+          className="rounded-full border border-slate-700 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-200 transition-colors hover:border-slate-500 hover:text-white"
         >
           VIEW DETAILS
         </Link>
@@ -58,9 +58,9 @@ export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProp
         {isPlan && (
           <button
             type="button"
-            className="flex items-center gap-1.5 rounded-full bg-[#ccff00] px-4 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-950 transition-colors hover:bg-[#b8e600]"
+            className="flex items-center gap-1.5 rounded-full bg-[#ccff00] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-950 transition-colors hover:bg-[#b8e600]"
           >
-            <Check className="h-4 w-4 stroke-[2.5]" />
+            <Check className="h-3.5 w-3.5 stroke-[2.5]" />
             MARK AS DONE
           </button>
         )}
@@ -68,7 +68,7 @@ export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProp
         <button
           type="button"
           aria-label="Remove exercise"
-          className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
+          className="flex h-7 w-7 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
         >
           <X className="h-4 w-4" />
         </button>
@@ -76,3 +76,4 @@ export default function PlanWorkoutCard({ workout, isPlan }: PlanWorkoutCardProp
     </article>
   );
 }
+
