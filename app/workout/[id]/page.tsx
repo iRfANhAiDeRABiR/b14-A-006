@@ -4,28 +4,26 @@ import WorkoutActions from "@/components/WorkoutActions";
 import type { Workout } from "@/types/workout";
 
 async function getWorkout(id: string): Promise<Workout | null> {
-  const fetchPrimary = fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, {
-    cache: "no-store",
-  }).then((res) => {
-    if (!res.ok) throw new Error();
-    return res.json();
-  });
-
-  const fetchFallback = fetch(
-    `https://api.api-store.workers.dev/api/fitlog/${id}`,
-    {
-      cache: "no-store",
+  try {
+    const res = await fetch(
+      `https://api.api-store.workers.dev/api/fitlog/${id}`,
+      { cache: "no-store" }
+    );
+    if (res.ok) {
+      return await res.json();
     }
-  ).then((res) => {
-    if (!res.ok) throw new Error();
-    return res.json();
-  });
+  } catch {}
 
   try {
-    return await Promise.any([fetchPrimary, fetchFallback]);
-  } catch {
-    return null;
-  }
+    const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, {
+      cache: "no-store",
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch {}
+
+  return null;
 }
 
 export default async function WorkoutDetailPage({

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import type { Workout } from "@/types/workout";
 
 type WorkoutContextType = {
@@ -39,6 +39,16 @@ export function WorkoutProvider({ children }: { children: ReactNode }) {
 
   return (
     <WorkoutContext.Provider value={{ plan, saved, addToPlan, addToSaved }}>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: "#1e293b",
+            color: "#f8fafc",
+            border: "1px solid #334155",
+          },
+        }}
+      />
       {children}
     </WorkoutContext.Provider>
   );
