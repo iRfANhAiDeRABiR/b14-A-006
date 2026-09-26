@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FitLog Global Base Styles */
 body {
-  background-color: #0f172a; /* Slate 900 dark background suitable for FitLog */
-  color: #f8fafc;           /* Slate 50 light text */
+  background-color: #0f172a;
+  color: #f8fafc;
   min-height: 100vh;
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;

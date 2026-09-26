@@ -4,11 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-// Reusable Navbar component for FitLog
 export default function Navbar() {
   const pathname = usePathname();
 
-  // Helper function to check if the current link is active
   const isActive = (path: string) => {
     if (path === "/") {
       return pathname === "/";
@@ -19,7 +17,6 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Left Side: Brand Logo */}
         <Link
           href="/"
           className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
@@ -36,9 +33,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Center: Navigation Links */}
         <nav className="flex items-center gap-1 sm:gap-2">
-          {/* Workout Link */}
           <Link
             href="/"
             className={`rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-medium transition-colors ${
@@ -50,7 +45,6 @@ export default function Navbar() {
             Workout
           </Link>
 
-          {/* My Plan Link */}
           <Link
             href="/my-plan"
             className={`rounded-full px-3.5 py-1.5 text-xs sm:text-sm font-medium transition-colors ${
@@ -63,9 +57,7 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Right Side: Status Badges (Static 0 counters for now) */}
         <div className="flex items-center gap-3 sm:gap-5">
-          {/* Plan Badge - Filled Accent Style */}
           <Link
             href="/my-plan"
             className="flex items-center gap-2 transition-opacity hover:opacity-90"
@@ -78,7 +70,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Saved Badge - Outline Style */}
           <Link
             href="/my-plan"
             className="flex items-center gap-2 transition-opacity hover:opacity-90"

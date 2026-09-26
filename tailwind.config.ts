@@ -8,7 +8,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // FitLog accent color from design (#ccff00 lime)
         accent: "#ccff00",
       },
     },
