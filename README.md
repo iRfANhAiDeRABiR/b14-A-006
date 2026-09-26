@@ -15,7 +15,7 @@ A modern workout library and daily training planner built with **Next.js**, **Ty
 
 <br />
 
-[🌐 Live Site](https://fitlog.iabir.me) · [▲ Vercel Deployment](https://fitlog-snowy-eight.vercel.app/) · [💻 Repository](https://github.com/ProgrammingHero1/B14-A6-Fit-Log)
+[🌐 Live Site](https://fitlog.iabir.me) · [▲ Vercel Deployment](https://fitlog-snowy-eight.vercel.app/) · [💻 Repository](https://github.com/iRfANhAiDeRABiR/b14-A-006)
 
 </div>
 
@@ -33,7 +33,7 @@ The project focuses on a clean UI, simple workout planning, responsive design, a
 
 - **Custom Domain:** https://fitlog.iabir.me
 - **Vercel Deployment:** https://fitlog-snowy-eight.vercel.app/
-- **GitHub Repository:** https://github.com/ProgrammingHero1/B14-A6-Fit-Log
+- **GitHub Repository:** https://github.com/iRfANhAiDeRABiR/b14-A-006
 
 ---
 
@@ -177,7 +177,7 @@ https://api.abcz.workers.dev/api/fitlog/1
 ## 📁 Project Structure
 
 ```text
-B14-A6-Fit-Log/
+b14-A-006/
 │
 ├── app/
 │   ├── my-plan/
@@ -220,13 +220,13 @@ B14-A6-Fit-Log/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/ProgrammingHero1/B14-A6-Fit-Log.git
+git clone https://github.com/iRfANhAiDeRABiR/b14-A-006.git
 ```
 
 ### 2. Enter the project folder
 
 ```bash
-cd B14-A6-Fit-Log
+cd b14-A-006
 ```
 
 ### 3. Install dependencies

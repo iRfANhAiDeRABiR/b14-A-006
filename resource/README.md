@@ -169,5 +169,5 @@ Deploy your project on Vercel, Netlify, Cloudflare Pages, or anywhere else befor
 ## 📬 Submission
 Fill in both links before submitting:
 
-- Live Link:
-- GitHub Repository Link:
+- Live Link: https://fitlog.iabir.me
+- GitHub Repository Link: https://github.com/iRfANhAiDeRABiR/b14-A-006
