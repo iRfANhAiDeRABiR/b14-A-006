@@ -16,15 +16,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-slate-900 text-slate-100 antialiased flex flex-col justify-between">
+      <body className="min-h-screen bg-slate-900 text-slate-100 antialiased flex flex-col">
         <WorkoutProvider>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <div className="flex-1">
-              {children}
-            </div>
-            <Footer />
+          <Navbar />
+          <div className="flex-1">
+            {children}
           </div>
+          <Footer />
         </WorkoutProvider>
       </body>
     </html>

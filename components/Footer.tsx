@@ -17,14 +17,14 @@ export default function Footer() {
             className="h-6 w-6 object-contain"
           />
           <span className="text-base font-bold tracking-wider text-white uppercase">
-            FitLog
+            FITLOG
           </span>
         </Link>
-        <p className="text-xs text-slate-400">
+
+        <p className="text-xs text-slate-400 text-center sm:text-right">
           © 2026 FitLog — Workout Library. Train hard, log honest.
         </p>
       </div>
     </footer>
   );
 }
-
